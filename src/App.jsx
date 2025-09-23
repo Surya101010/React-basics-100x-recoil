@@ -1,18 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { RecoilRoot , atom} from 'recoil'
 
 function App() {
-  const [count,setCount] = useState(0);
-  return (<>
-  {count}
-  <Increase setCount={setCount}/>
-  <Decrease setCount={setCount}/>
-  </>
+  
+  return (<RecoilRoot>
+    <Counter  />
+  </RecoilRoot>
   )
 }
 
+function Counter(){
+  const [count,setCount] = useState(0);
+  return(<>
+  {count}
+  <Increase setCount={setCount}/>
+  <Decrease setCount={setCount}/>
+  </>)
+}
 function Decrease({setCount}){
   function decrease(){
     setCount(count =>count-1)
