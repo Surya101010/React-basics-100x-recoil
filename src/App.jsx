@@ -1,56 +1,108 @@
-import React from "react";
+import React, { useEffect, useState,memo } from "react";
 import { RecoilRoot , atom, useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil'
 import { counterAtom } from './store/atoms/counter'
+
+// function App() {
+
+//   return (
+//     <RecoilRoot>
+//      <Counter />
+//     </RecoilRoot>
+//   )
+// }
+
+// function Counter() {
+
+//   return <div>
+//     <CurrentCount />
+//     <Increase />
+//     <Decrease />
+//   </div>
+// }
+
+// function CurrentCount() {
+//   const count = useRecoilValue(counterAtom);
+//   return <div>
+//     {count}
+//   </div>
+// }
+
+// function Decrease() {
+
+//   const setCount = useSetRecoilState(counterAtom);
+
+//   function decrease() {
+//     setCount(c => c - 1);
+//   }
+
+//   return <div>
+//     <button onClick={decrease}>Decrease</button>
+//   </div>
+// }
+
+
+// function Increase() {
+//   const setCount = useSetRecoilState(counterAtom);
+
+//   function increase() {
+//     setCount(c => c + 1);
+//   }
+
+//   return <div>
+//     <button onClick={increase}>Increase</button>
+//   </div>
+// }
+
+// export default App
 
 function App() {
 
   return (
-    <RecoilRoot>
      <Counter />
-    </RecoilRoot>
   )
 }
 
 function Counter() {
-
+  const [count,setCount]=useState(0);
+  useEffect(() => {
+    setInterval(()=>{
+      setCount(c => c+1)
+    },3000)
+  },[]);
   return <div>
     <CurrentCount />
     <Increase />
     <Decrease />
   </div>
 }
-
-function CurrentCount() {
-  const count = useRecoilValue(counterAtom);
+const CurrentCount =memo(function() {
   return <div>
-    {count}
+    1
   </div>
-}
+})
 
-function Decrease() {
+const Decrease= memo(function() {
 
-  const setCount = useSetRecoilState(counterAtom);
+  
 
   function decrease() {
-    setCount(c => c - 1);
   }
 
   return <div>
     <button onClick={decrease}>Decrease</button>
   </div>
-}
+})
 
 
-function Increase() {
-  const setCount = useSetRecoilState(counterAtom);
+const Increase= memo(function() {
+  
 
   function increase() {
-    setCount(c => c + 1);
   }
 
   return <div>
     <button onClick={increase}>Increase</button>
   </div>
-}
+})
 
 export default App
